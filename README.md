@@ -1,7 +1,7 @@
 # TheWebView
 TheWebView
 
-一、添加依赖
+一、添加依赖  
 allprojects {  
 		repositories {  
 			...  
@@ -13,16 +13,16 @@ dependencies {
 	        implementation 'com.github.ZhouJianFengFirst:TheWebView:1.0'  
 	}  
 	
-二、介紹、  
+二、介紹、   
   
 前言：为什么要写出一个跨进程的webview，我们在开发过程中我们都知道，webview是一个非常耗费资源内存的控件，很容易造成内存溢出等问题，那么我们如何去解决这个问题呢，通过开起一个新的进程来加载WebView使用Bandler进程间通信，来完成js与native之间的通信。
-
-三、使用
-
-1)创建WebActivity，这里我把WebView抽取成了两个Fragment：
-CommonWebFragment 用于单页面的WebView，
-AccountWebFragment 同时增添了请求头部的添加Header和是否同步Cookie 
-
+  
+三、使用  
+  
+1)创建WebActivity，这里我把WebView抽取成了两个Fragment：  
+CommonWebFragment 用于单页面的WebView，  
+AccountWebFragment 同时增添了请求头部的添加Header和是否同步Cookie   
+  
 /**
  * @author: zjf
  * @data:2019/12/20
