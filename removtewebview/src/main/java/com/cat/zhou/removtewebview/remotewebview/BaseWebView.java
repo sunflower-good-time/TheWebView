@@ -18,13 +18,14 @@ import android.webkit.WebView;
 import com.cat.zhou.removtewebview.javascriptinterface.WebviewJavascriptInterface;
 import com.cat.zhou.removtewebview.remotewebview.callback.WebViewCallBack;
 import com.cat.zhou.removtewebview.remotewebview.setting.WebSetting;
+import com.cat.zhou.removtewebview.remotewebview.webviewclient.TheWebviewClient;
 import com.cat.zhou.removtewebview.remotewebview.webviewclient.XiangxueWebviewClient;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class BaseWebView extends WebView implements XiangxueWebviewClient.WebviewTouch {
+public class BaseWebView extends WebView implements TheWebviewClient.WebviewTouch {
     private static final String TAG = "XiangxueWebView";
     public static final String CONTENT_SCHEME = "file:///android_asset/";
     private ActionMode.Callback mCustomCallback;
@@ -32,7 +33,7 @@ public class BaseWebView extends WebView implements XiangxueWebviewClient.Webvie
     private WebViewCallBack webViewCallBack;
     private Map<String, String> mHeaders;
     private WebviewJavascriptInterface remoteInterface = null;
-    private XiangxueWebviewClient mXiangxueWebviewClient;
+    private TheWebviewClient mTheWebviewClient;
 
     public BaseWebView(Context context) {
         super(context);
@@ -70,8 +71,8 @@ public class BaseWebView extends WebView implements XiangxueWebviewClient.Webvie
     protected void init(Context context) {
         this.context = context;
         WebSetting.Companion.getInstant().setSetting(this);
-        mXiangxueWebviewClient = new XiangxueWebviewClient(this, webViewCallBack, mHeaders, this);
-        setWebViewClient(mXiangxueWebviewClient);
+        mTheWebviewClient = new TheWebviewClient(this, webViewCallBack, mHeaders, this);
+        setWebViewClient(mTheWebviewClient);
 
         /**
          * Web Native交互触发

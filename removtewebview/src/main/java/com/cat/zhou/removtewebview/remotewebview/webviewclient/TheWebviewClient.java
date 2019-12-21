@@ -25,7 +25,8 @@ import com.cat.zhou.removtewebview.remotewebview.callback.WebViewCallBack;
 
 import java.util.Map;
 
-public class XiangxueWebviewClient extends WebViewClient {
+
+public class TheWebviewClient extends WebViewClient {
 
     private static final String TAG = "XXWebviewCallBack";
     public static final String SCHEME_SMS = "sms:";
@@ -35,7 +36,7 @@ public class XiangxueWebviewClient extends WebViewClient {
     private Map<String, String> mHeaders;
     private WebviewTouch mWebviewTouch;
 
-    public XiangxueWebviewClient(WebView webView, WebViewCallBack webViewCallBack, Map<String, String> headers, WebviewTouch touch){
+    public TheWebviewClient(WebView webView, WebViewCallBack webViewCallBack, Map<String, String> headers, WebviewTouch touch){
         this.webViewCallBack = webViewCallBack;
         this.webView = webView;
         this.mHeaders = headers;
@@ -69,9 +70,6 @@ public class XiangxueWebviewClient extends WebViewClient {
         if (handleLinked(url)) {
             return true;
         }
-        if (webViewCallBack != null && webViewCallBack.overrideUrlLoading(view, url)) {
-            return true;
-        }
         // 控制页面中点开新的链接在当前webView中打开
         view.loadUrl(url, mHeaders);
         return true;
@@ -89,10 +87,8 @@ public class XiangxueWebviewClient extends WebViewClient {
         if (webView.getUrl().equals(request.getUrl().toString())) {
             return super.shouldOverrideUrlLoading(view, request);
         }
+
         if (handleLinked(request.getUrl().toString())) {
-            return true;
-        }
-        if (webViewCallBack != null && webViewCallBack.overrideUrlLoading(view, request.getUrl().toString())) {
             return true;
         }
         // 控制页面中点开新的链接在当前webView中打开
@@ -145,7 +141,7 @@ public class XiangxueWebviewClient extends WebViewClient {
     }
 
     @TargetApi(21)
-    @Override //url拦截
+    @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
         return shouldInterceptRequest(view, request.getUrl().toString());
     }
